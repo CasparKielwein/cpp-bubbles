@@ -10,3 +10,4 @@ Each bubble comes with a small description of usage and a test-driver which serv
 # Current collection of bubbles:
 * NamedValue, a simple template Wrapper for the Named Value idiom
 * demangle, functions to demangle typeid if returned mangled by gcc
+* pair_range, use std::pair<Iterator> in range based for loop
