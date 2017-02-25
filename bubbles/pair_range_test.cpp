@@ -26,12 +26,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "pair_range.hpp"
-
 #include <algorithm>
 #include <cassert>
 #include <iostream>
 #include <vector>
+#include "pair_range.hpp"
 
 
 int main() {

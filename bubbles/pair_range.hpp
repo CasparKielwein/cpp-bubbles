@@ -33,7 +33,7 @@
 #include <utility>
 
 /**
- * \brief pair_range is a simple wrapper around two iterators, which itself forms a valid range
+ * \brief PairRange is a simple wrapper around two iterators, which itself forms a valid range
  *
  * pair_range is most useful to feed two iterators and std::pair of iterators
  * to range based for loops.
@@ -47,13 +47,13 @@
  * \author ckielwein
  */
 template<class B, class E>
-class pair_range {
+class PairRange {
 public:
-	pair_range(B b, E e) :
+	PairRange(B b, E e) :
 			begin_ { b }, end_ { e } {
 	}
 
-	pair_range(std::pair<B, E> p) :
+	PairRange(std::pair<B, E> p) :
 			begin_ { p.first }, end_ { p.second } {
 	}
 
@@ -72,25 +72,25 @@ private:
 };
 
 template<class B, class E>
-auto begin(pair_range<B, E> r) {
+auto begin(PairRange<B, E> r) {
 	return r.begin();
 }
 
 template<class B, class E>
-auto end(pair_range<B, E> r) {
+auto end(PairRange<B, E> r) {
 	return r.end();
 }
 
 ///Creates a range from two iterators
 template<class B, class E>
 auto make_range(B b, E e) {
-	return pair_range<B, E> { b, e };
+	return PairRange<B, E> { b, e };
 }
 
 ///Creates a range from a std::pair of iterators
 template<class B, class E>
 auto make_range(std::pair<B, E> p) {
-	return pair_range<B, E> { p.first, p.second };
+	return PairRange<B, E> { p.first, p.second };
 }
 
 #endif /* BUBBLES_PAIR_RANGE_HPP_ */
