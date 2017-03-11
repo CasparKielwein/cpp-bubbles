@@ -8,8 +8,9 @@ A bubble is a single header, or header plus compilation unit.
 Each bubble comes with a small description of usage and a test-driver which serves both as example and test.
 
 # Current collection of bubbles:
-* NamedValue, a simple template Wrapper for the Named Value idiom
-* demangle, functions to demangle typeid if returned mangled by gcc
-* pair_range, use std::pair<Iterator> in range based for loop
-* power_of_two check if an integral valus is a power of two, and get next
-* reinterpret_copy, reinterpret_cast without the strict alising violation
+* NamedValue: a simple template Wrapper for the Named Value idiom
+* demangle: functions to demangle typeid if returned mangled by gcc
+* pair_range: use std::pair<Iterator> in range based for loop
+* power_of_two: check if an integral valus is a power of two, and get next
+* prettyprint: convenient print functions for all your printf debugging needs
+* reinterpret_copy: reinterpret_cast without the strict alising violation
