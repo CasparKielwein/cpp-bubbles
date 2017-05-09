@@ -42,8 +42,10 @@
  * It is unclear which parameter is the height, and which is the width.
  * with NamedValue it becomes:
  * ~~~{.cpp}
- * using Height = NamedValue<double>;
- * using Width = NamedValue<double>;
+ * struct height_t {};
+ * struct widh_t {};
+ * using Height = NamedValue<double, height_t>;
+ * using Width = NamedValue<double, widh_t>;
  * auto a = Rectangle{Height{1.2}, Width{3.4}};
  * ~~~
  * It is now impossible to accidently construct the Rectangle
@@ -52,11 +54,12 @@
  * operator== and operator< are provided for convenience and storage in std::set.
  *
  * \tparam T the Value Type NamedValue is wrapped around
+ * \tparam tag a unique type for each different NamedValue
  * \invariant internal storage value is always a valid object.
  * \author ckielwein
  *
  */
-template<class T>
+template<class T, class tag>
 class NamedValue {
 public:
 	/// Require explicit conversion from original value
@@ -80,13 +83,13 @@ private:
 	T value;
 };
 
-template<class T>
-bool operator==(const NamedValue<T>& l, const NamedValue<T>& r) {
+template<class T, class tag>
+bool operator==(const NamedValue<T,tag>& l, const NamedValue<T,tag>& r) {
 	return l.get() == r.get();
 }
 
-template<class T>
-bool operator<(const NamedValue<T>& l, const NamedValue<T>& r) {
+template<class T, class tag>
+bool operator<(const NamedValue<T,tag>& l, const NamedValue<T,tag>& r) {
 	return l.get() < r.get();
 }
 

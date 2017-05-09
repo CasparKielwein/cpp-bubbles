@@ -30,7 +30,9 @@
 
 #include <cassert>
 
-using IntValue = NamedValue<int>;
+struct unique_tag {};
+
+using IntValue = NamedValue<int, unique_tag>;
 
 int getVal(const IntValue& v) {
 	return v.get();
@@ -42,7 +44,7 @@ struct foo {
 	}
 };
 
-using FooValue = NamedValue<foo>;
+using FooValue = NamedValue<foo, unique_tag>;
 
 int main() {
 
