@@ -34,7 +34,7 @@
 /**
  * \brief NamedValue provides an implementation of the Named Value idiom.
  *
- * NamedValue is a simple typesafe wrapper around any value.
+ * NamedValue aka strict typedef is a simple typesafe wrapper around any value.
  *
  * It is useful to provide both additional safety and documentation to interfaces
  * consider a call to a function:
@@ -53,11 +53,14 @@
  *
  * operator== and operator< are provided for convenience and storage in std::set.
  *
+ * A nice side note is, that using the NamedValue actually allows
+ * compiler optimizations, when passing Values by reference, as the compiler
+ * knows these references cannot alias, when they refer to different types.
+ *
  * \tparam T the Value Type NamedValue is wrapped around
  * \tparam tag a unique type for each different NamedValue
  * \invariant internal storage value is always a valid object.
  * \author ckielwein
- *
  */
 template<class T, class tag>
 class NamedValue {

@@ -30,6 +30,7 @@
 #define BUBBLES_REINTERPRET_COPY_HPP_
 
 #include <cstring>
+#include <type_traits>
 
 /**
  * \brief reinterpret conversion between two types and no strict aliasing violation
@@ -38,7 +39,7 @@
  * \return value of type T, which is the converted value of s
  *
  * reinterpet_copy does bitwise conversion, just like reinterpret_cast.
- * It uses memcopy to "copy" the bytes.
+ * It uses memcpy to "copy" the bytes.
  * With optimizations enabled, at least gcc, 4.5+, clang 3.5+ and msvc for x86_64
  * will completely remove the copy.
  *
@@ -47,6 +48,7 @@
  * between types.
  * reinterpret_cast violates the strict aliasing rule.
  * Unions must only be read through the same type, they where written.
+ *
  * In reality at least of early 2017, neither of these options will actually cause a bug.
  * But why not be strict here, it doesn't cost anything on a good compiler.
  *
@@ -59,6 +61,11 @@ template<class T, class S>
 T reinterpret_copy(S s) {
 	static_assert(sizeof(T)==sizeof(S),
 			"reinterpret_copy demands that Source and Target Types are the same size");
+	static_assert(std::is_trivially_copyable<T>::value,
+			"Target type of reinterpret_copy needs to be trivially copyable");
+	static_assert(std::is_trivially_copyable<S>::value,
+			"Source type of reinterpret_copy needs to be trivially copyable");
+
 	T result{};
 	std::memcpy(&result, &s, sizeof(s));
 	return result;
