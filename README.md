@@ -14,4 +14,5 @@ Each bubble comes with a small description of usage and a test-driver which serv
 * power_of_two: check if an integral valus is a power of two, and get next
 * prettyprint: convenient print functions for all your printf debugging needs
 * reinterpret_copy: reinterpret_cast without the strict alising violation
+* safe_cstring: typesafe replacement of cstring functions memcpy, memmove and memset
 * scope_exit: automatically call code on end of scopes
