@@ -1,7 +1,7 @@
 /*
  * BSD 2-Clause License
  *
- * Copyright (c) 2017, Caspar Kielwein
+ * Copyright (c) 2020, Caspar Kielwein
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,25 +26,22 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "prettyprint.hpp"
+#ifndef CPP_BUBBLES_GET_OR_DEFAULT_HPP
+#define CPP_BUBBLES_GET_OR_DEFAULT_HPP
 
-#include <cassert>
-#include <iostream>
-#include <vector>
-
-int main() {
-
-	print("pretty print example");
-
-	print(1);
-	print("a string literal");
-
-	std::vector<float> a_vector{1,2,3.1419};
-	print_range(a_vector);
-
-	print(1,2,"foo",std::make_pair(1, "bar"));
-
-	PRINT_TRACE();
-
-	return 0;
+/**
+ * \param container search in this container.
+ * @param key search in container under this key.
+ * @param default_value return this if no value is found.
+ * \return either the value corresponding to given key, or default_value if no value is stored for key.
+ */
+template<class Map, class Key, class Value>
+typename Map::mapped_type get_or_default(const Map& container, const Key& key, const Value& default_value) {
+    auto result_it = container.find(key);
+    if (result_it != container.end())
+        return result_it->second;
+    else
+        return default_value;
 }
+
+#endif //CPP_BUBBLES_GET_OR_DEFAULT_HPP

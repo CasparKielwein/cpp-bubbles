@@ -1,7 +1,7 @@
 /*
  * BSD 2-Clause License
  *
- * Copyright (c) 2017, Caspar Kielwein
+ * Copyright (c) 2020, Caspar Kielwein
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,25 +26,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "prettyprint.hpp"
-
+#include "get_or_default.hpp"
+#include <map>
 #include <cassert>
-#include <iostream>
-#include <vector>
 
 int main() {
 
-	print("pretty print example");
+    std::map<int,int> test_map;
+    test_map[0] = 0;
+    test_map[1] = 1;
 
-	print(1);
-	print("a string literal");
+    assert(get_or_default(test_map, 0, -1) == 0);
+    assert(get_or_default(test_map, 1, -1) == 1);
+    assert(get_or_default(test_map, 9, -1) == -1);
 
-	std::vector<float> a_vector{1,2,3.1419};
-	print_range(a_vector);
+    std::map<int, int*> map_with_pointer;
+    int an_int = 1;
+    map_with_pointer[0] = &an_int;
 
-	print(1,2,"foo",std::make_pair(1, "bar"));
+    assert(*(get_or_default(map_with_pointer, 0, nullptr)) == an_int);
+    assert(get_or_default(map_with_pointer, 1, nullptr) == nullptr);
 
-	PRINT_TRACE();
-
-	return 0;
+    return 0;
 }

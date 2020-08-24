@@ -10,6 +10,7 @@ Each bubble comes with a small description of usage and a test-driver which serv
 # Current collection of bubbles:
 * NamedValue: a simple template Wrapper for the Named Value idiom
 * demangle: functions to demangle typeid if returned mangled by gcc
+* get_or_default: function to either return the value of a map or a default value.
 * pair_range: use std::pair<Iterator> in range based for loop
 * power_of_two: check if an integral valus is a power of two, and get next
 * prettyprint: convenient print functions for all your printf debugging needs
